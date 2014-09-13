@@ -13,7 +13,8 @@ SECOND_INTERVAL = 30
 THIRD_INTERVAL = 45
 
 app = Flask(__name__)
-r = redis.StrictRedis(host='localhost', port=6379, db=0)
+redis_url = os.environ.get('REDISTOGO_URL', 'redis://localhost:6379')
+r = redis.from_url(redis_url)
 
 def get_current_time():
     return arrow.now()
